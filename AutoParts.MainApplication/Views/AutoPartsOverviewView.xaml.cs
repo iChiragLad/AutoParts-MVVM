@@ -11,11 +11,5 @@ namespace AutoParts.MainApplication.Views
         {
             InitializeComponent();
         }
-
-        private void EditButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var autoPartsDetailView = new AutoPartsDetailView();
-            autoPartsDetailView.ShowDialog();
-        }
     }
 }

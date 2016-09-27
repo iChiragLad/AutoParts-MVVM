@@ -8,9 +8,11 @@ namespace AutoParts.Model
 {
     public class Parts
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
+        public DateTime Dop { get; set; }
     }
 }

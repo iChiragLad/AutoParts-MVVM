@@ -17,7 +17,7 @@ namespace AutoParts.DataAccessLayer
         }
         public void DeletePart(Parts part)
         {
-            parts.Remove(part);
+            parts.RemoveAll(x => x.Name == part.Name);
         }
         public List<Parts> GetAllParts()
         {
@@ -26,13 +26,13 @@ namespace AutoParts.DataAccessLayer
 
         public Parts GetPartByID(int id)
         {
-            return parts.Find(x => x.ID == id);
+            return parts.Find(x => x.Id == id);
         }
 
         public void UpdatePart(Parts part)
         {
-            var matchingPart = parts.FirstOrDefault(x => x.ID == part.ID);
-            matchingPart.ID = part.ID;
+            var matchingPart = parts.FirstOrDefault(x => x.Name == part.Name);
+            matchingPart.Name = part.Name;
             matchingPart.Price = part.Price;
             matchingPart.Quantity = part.Quantity;
             matchingPart.Description = part.Description;
@@ -44,45 +44,57 @@ namespace AutoParts.DataAccessLayer
             {
                 new Parts()
                 {
-                    ID = 1,
+                    Id = 1,
+                    Name = "Bolt",
                     Description = "First Description",
                     Quantity = 10,
-                    Price = 100
+                    Price = 100,
+                    Dop = new DateTime(2015, 5, 26)
                 },
                 new Parts()
                 {
-                    ID = 2,
+                    Id = 2,
+                    Name = "Screw",
                     Description = "Second Description",
                     Quantity = 8,
-                    Price = 150
+                    Price = 150,
+                    Dop = new DateTime(2013, 8, 19)
                 },
                 new Parts()
                 {
-                    ID = 3,
+                    Id = 3,
+                    Name = "Nut",
                     Description = "Third Description",
                     Quantity = 16,
-                    Price = 700
+                    Price = 700,
+                    Dop = new DateTime(2015, 12, 30)
                 },
                 new Parts()
                 {
-                    ID = 4,
+                    Id = 4,
+                    Name = "Oil",
                     Description = "Fourth Description",
                     Quantity = 18,
-                    Price = 800
+                    Price = 800,
+                    Dop = new DateTime(2014, 8, 2)
                 },
                 new Parts()
                 {
-                    ID = 5,
+                    Id = 5,
+                    Name = "Grease",
                     Description = "Fifth Description",
                     Quantity = 2,
-                    Price = 450
+                    Price = 450,
+                    Dop = new DateTime(2011, 3, 11)
                 },
                 new Parts()
                 {
-                    ID = 6,
+                    Id = 6,
+                    Name = "Cloth",
                     Description = "Sixth Description",
                     Quantity = 9,
-                    Price = 1500
+                    Price = 1500,
+                    Dop = new DateTime(2009, 10, 25)
                 }
             };
         }

@@ -1,41 +1,93 @@
 ﻿using AutoParts.Model;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
+using AutoParts.DataAccessLayer;
+using AutoParts.MainApplication.Extensions;
+using AutoParts.MainApplication.Messages;
+using AutoParts.MainApplication.Services;
+using AutoParts.MainApplication.Utility;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace AutoParts.MainApplication.ViewModel
 {
     class AutoPartsOverviewViewModel : INotifyPropertyChanged
     {
-        private Parts selectedPart;
+        private readonly IDataAccessService _dataAccessService;
+        private readonly IOpenNextWindowService _openNextWindowService;
+        public AutoPartsOverviewViewModel(IDataAccessService dataService, IOpenNextWindowService WindowService)
+        {
+            _dataAccessService = dataService;
+            _openNextWindowService = WindowService;
+            Messenger.Default.Register<UpdatePartsList>(this, OnUpdatePartsListReceived);
+            LoadData();
+            LoadCommands();
+        }
+
+        public AutoPartsOverviewViewModel(): this(new DataAccessService(new AutoPartsRepository()), new OpenNextWindowService())
+        {
+            
+        }
+
+        private void LoadData()
+        {
+            PartsCollection = _dataAccessService.GetAllParts().ToObservableCollection();
+        }
+        private void LoadCommands()
+        {
+            EditCommand = new CustomCommand(EditPart, canEditPart);
+        }
+
+        public ICommand EditCommand{ get; set; }
+        
+
+        private Parts _selectedPart;
         public Parts SelectedPart
         {
             get
             {
-                return selectedPart;
+                return _selectedPart;
             }
             set
             {
-                selectedPart = value;
+                _selectedPart = value;
                 RaisePropertyChanged("SelectedPart");
             }
         }
 
-        private List<Parts> partCollection;
-        public List<Parts> PartsCollection
+        private ObservableCollection<Parts> _partCollection;
+        public ObservableCollection<Parts> PartsCollection
         {
             get
             {
-                return partCollection;
+                return _partCollection;
             }
             set
             {
-                partCollection = value;
+                _partCollection = value;
                 RaisePropertyChanged("PartsCollection");
             }
+        }
+
+        private void EditPart(object obj)
+        {
+            Messenger.Default.Send<Parts>(SelectedPart);
+            _openNextWindowService.OpenWindow();
+        }
+
+        private bool canEditPart(object obj)
+        {
+            if (SelectedPart != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void OnUpdatePartsListReceived(UpdatePartsList obj)
+        {
+            _openNextWindowService.CloseWindow();
+            LoadData();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
