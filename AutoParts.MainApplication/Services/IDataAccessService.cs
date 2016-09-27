@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AutoParts.MainApplication.Services
 {
-    interface IDataAccessService
+    public interface IDataAccessService
     {
         void DeletePartEntry(Parts part);
         void SavePart(Parts part);
