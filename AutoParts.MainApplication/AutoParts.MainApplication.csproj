@@ -70,6 +70,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\DataAccessService.cs" />
+    <Compile Include="Services\IDataAccessService.cs" />
+    <Compile Include="ViewModel\AutoPartsDetailViewModel.cs" />
+    <Compile Include="ViewModel\AutoPartsOverviewViewModel.cs" />
     <Compile Include="Views\AutoPartsDetailView.xaml.cs">
       <DependentUpon>AutoPartsDetailView.xaml</DependentUpon>
     </Compile>
@@ -105,6 +109,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoParts.DataAccessLayer\AutoParts.DataAccessLayer.csproj">
+      <Project>{0C314AEA-4939-4F69-A2AA-7F67366FBB64}</Project>
+      <Name>AutoParts.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AutoParts.Model\AutoParts.Model.csproj">
+      <Project>{846794fa-f9f6-4efa-89f2-7427c2f1fde1}</Project>
+      <Name>AutoParts.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
