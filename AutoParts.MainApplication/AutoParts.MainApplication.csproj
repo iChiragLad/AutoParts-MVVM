@@ -90,6 +90,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Extensions\ToObservableCollectionExtension.cs" />
     <Compile Include="Messages\UpdatePartsList.cs" />
     <Compile Include="Services\DataAccessService.cs" />
@@ -146,7 +147,14 @@
       <Name>AutoParts.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\part1.jpg" />
+    <Resource Include="Images\part2.jpg" />
+    <Resource Include="Images\part3.jpg" />
+    <Resource Include="Images\part4.jpg" />
+    <Resource Include="Images\part5.jpg" />
+    <Resource Include="Images\part6.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

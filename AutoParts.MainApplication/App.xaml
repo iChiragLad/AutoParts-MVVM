@@ -4,8 +4,11 @@
              xmlns:local="clr-namespace:AutoParts.MainApplication"
              StartupUri="Views/AutoPartsOverviewView.xaml"
              xmlns:viewModel="clr-namespace:AutoParts.MainApplication.ViewModel"
+             xmlns:converter="clr-namespace:AutoParts.MainApplication.Converter"
+             
              >
     <Application.Resources>
+        <converter:ImageConverter x:Key="MyImageConverter"></converter:ImageConverter>
         <local:ViewModelLocator x:Key="ViewModelLocator"></local:ViewModelLocator>
     </Application.Resources>
 </Application>
