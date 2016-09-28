@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoParts.MainApplication", "AutoParts.MainApplication\AutoParts.MainApplication.csproj", "{5A97F893-3F52-4292-96B9-BC0CE80A2DBC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0C314AEA-4939-4F69-A2AA-7F67366FBB64} = {0C314AEA-4939-4F69-A2AA-7F67366FBB64}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoParts.DataAccessLayer", "AutoParts.DataAccessLayer\AutoParts.DataAccessLayer.csproj", "{0C314AEA-4939-4F69-A2AA-7F67366FBB64}"
 EndProject
