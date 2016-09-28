@@ -6,6 +6,7 @@ using AutoParts.MainApplication.Utility;
 using AutoParts.Model;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace AutoParts.MainApplication.ViewModel
 {
@@ -26,12 +27,12 @@ namespace AutoParts.MainApplication.ViewModel
 
         private void LoadCommands()
         {
-            SaveCommand = new CustomCommand(SavePart, canSavePart);
-            DeleteCommand = new CustomCommand(DeletePart, canDeletePart);
+            SaveCommand = new RelayCommand<string>(SavePart, canSavePart);
+            DeleteCommand = new RelayCommand<string>(DeletePart, canDeletePart);
         }
 
-        public ICommand SaveCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
+        public RelayCommand<string> SaveCommand { get; set; }
+        public RelayCommand<string> DeleteCommand { get; set; }
 
         private Parts _selectedPart;
         public Parts SelectedPart

@@ -9,6 +9,7 @@ using AutoParts.MainApplication.Services;
 using AutoParts.MainApplication.Utility;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace AutoParts.MainApplication.ViewModel
 {
@@ -36,10 +37,19 @@ namespace AutoParts.MainApplication.ViewModel
         }
         private void LoadCommands()
         {
-            EditCommand = new CustomCommand(EditPart, canEditPart);
+            EditCommand = new RelayCommand<string>(EditPart,
+                delegate (string x)
+                {
+                    if (SelectedPart != null)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            );
         }
 
-        public ICommand EditCommand{ get; set; }
+        public RelayCommand<string> EditCommand{ get; set; }
         
 
         private Parts _selectedPart;
@@ -72,15 +82,6 @@ namespace AutoParts.MainApplication.ViewModel
         {
             Messenger.Default.Send<Parts>(SelectedPart);
             _openNextWindowService.OpenWindow();
-        }
-
-        private bool canEditPart(object obj)
-        {
-            if (SelectedPart != null)
-            {
-                return true;
-            }
-            return false;
         }
 
         private void OnUpdatePartsListReceived(UpdatePartsList obj)
