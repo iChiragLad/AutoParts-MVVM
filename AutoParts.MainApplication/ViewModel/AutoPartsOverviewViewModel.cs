@@ -8,10 +8,11 @@ using AutoParts.MainApplication.Messages;
 using AutoParts.MainApplication.Services;
 using AutoParts.MainApplication.Utility;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight;
 
 namespace AutoParts.MainApplication.ViewModel
 {
-    class AutoPartsOverviewViewModel : INotifyPropertyChanged
+    class AutoPartsOverviewViewModel : ViewModelBase
     {
         private readonly IDataAccessService _dataAccessService;
         private readonly IOpenNextWindowService _openNextWindowService;
@@ -50,8 +51,7 @@ namespace AutoParts.MainApplication.ViewModel
             }
             set
             {
-                _selectedPart = value;
-                RaisePropertyChanged("SelectedPart");
+                Set(() => SelectedPart, ref _selectedPart, value);
             }
         }
 
@@ -64,8 +64,7 @@ namespace AutoParts.MainApplication.ViewModel
             }
             set
             {
-                _partCollection = value;
-                RaisePropertyChanged("PartsCollection");
+                Set(() => PartsCollection, ref _partCollection, value);
             }
         }
 
@@ -90,13 +89,5 @@ namespace AutoParts.MainApplication.ViewModel
             LoadData();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        void RaisePropertyChanged(string property)
-        {
-            if(PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
     }
 }

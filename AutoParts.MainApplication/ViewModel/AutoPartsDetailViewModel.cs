@@ -5,10 +5,11 @@ using AutoParts.MainApplication.Messages;
 using AutoParts.MainApplication.Utility;
 using AutoParts.Model;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight;
 
 namespace AutoParts.MainApplication.ViewModel
 {
-    class AutoPartsDetailViewModel : INotifyPropertyChanged
+    class AutoPartsDetailViewModel : ViewModelBase
     {
         IAutoPartsRepository _autoPartsRepository;
         public AutoPartsDetailViewModel()
@@ -41,8 +42,7 @@ namespace AutoParts.MainApplication.ViewModel
             }
             set
             {
-                _selectedPart = value;
-                RaisePropertyChanged("SelectedPart");
+                Set(() => SelectedPart, ref _selectedPart, value);
             }
         }
 
@@ -64,15 +64,5 @@ namespace AutoParts.MainApplication.ViewModel
             _autoPartsRepository.UpdatePart(SelectedPart);
             Messenger.Default.Send<UpdatePartsList>(new UpdatePartsList());
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
-
     }
 }
